@@ -18,6 +18,28 @@ public class Algorithm {
 
 	}
 	
+	/*
+	 * For our definition of a friend wherein both choose each other, removes students from a list that didn't choose each other
+	 * We need to consider whether or not changing the original student object is a good idea (ie if someone wants to sort before everyone pays)
+	 * At the moment, it DOES change the students info, so arguably, make a copy of the ArrayList <Student> students then run it through this
+	 */
+	public void friendExist (ArrayList<Student> students, int studentIndex) {
+		
+		// if arrayList isn't empty, finds a student number on student's friends, checks if friend is not attending, if so, removes
+		if (!students.get(studentIndex).friends.isEmpty()) {
+//			int numFriends = students.get(studentIndex).friends.size(); //can be used for clarity, but not needed
+//			int numStudents = students.size(); //can be used for clarity, but not needed
+			for (int i = 0; i < students.get(studentIndex).friends.size(); i++) { 
+				for (int j = 0; j < students.size(); j++) {
+					if(students.get(studentIndex).friends.get(i).compareTo(students.get(j).studentNumber) != 0) {
+						students.get(studentIndex).friends.remove(j);
+					}
+				}
+			}
+		}
+	}
+	
+	
 	
 	//in the event that information is given to us from a file IN ORDER OF PURCHASE and not an arrayList
 	public ArrayList<Student> studentToArrayFromFile (File f) {
